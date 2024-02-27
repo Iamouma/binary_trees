@@ -76,7 +76,9 @@ void print_push(binary_tree_t *node, levelorder_queue_t *head, levelorder_queue_
 		void (*func)(int));
 void pop(levelorder_queue_t **head);
 void binary_tree_levelorder(const binary_tree_t *tree, void (*func)(int));
-
+void push(binary_tree_t *node, levelorder_queue_t *head,
+                levelorder_queue_t **tail);
+int binary_tree_is_complete(const binary_tree_t *tree);
 
 
 
