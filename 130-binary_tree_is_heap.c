@@ -1,5 +1,4 @@
 #include "binary_trees.h"
-#include <stddef.h>
 /**
  * binary_tree_is_heap - check if a binary tree is a MBH
  * @tree: a pointer to the root node of the tree
@@ -68,7 +67,7 @@ int bc_helper(const binary_tree_t *tree, size_t index, size_t size)
 		return (0);
 
 	return (bc_helper(tree->left, 2 * index + 1, size) &&
-		bc_helper(tree->right, 2 * index + 2, size));
+		bcc_helper(tree->right, 2 * index + 2, size));
 }
 
 /**
