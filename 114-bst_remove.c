@@ -36,19 +36,19 @@ bst_t *bst_delete(bst_t *root, bst_t *node)
 	if (node->right == NULL)
 	{
 		if (parent != NULL && parent->left == node)
-                        parent->left = node->left;
-                else if (parent != NULL)
-                        parent->right = node->left;
-                if (node->left != NULL)
-                        node->left->parent = parent;
-                free(node);
-                return (parent == NULL ? node->left : root);
+			parent->left = node->left;
+		else if (parent != NULL)
+			parent->right = node->left;
+		if (node->left != NULL)
+			node->left->parent = parent;
+		free(node);
+		return (parent == NULL ? node->left : root);
 	}
 
 	successor = inorder_successor(node->right);
 	node->n = successor->n;
 
-	return(bst_delete(root, successor));
+	return (bst_delete(root, successor));
 }
 
 /**
@@ -62,7 +62,7 @@ bst_t *bst_remove_recursive(bst_t *root, bst_t *node, int value)
 	if (node != NULL)
 	{
 		if (node->n == value)
-			return(bst_delete(root, node));
+			return (bst_delete(root, node));
 		if (node->n > value)
 			return (bst_remove_recursive(root, node->left, value));
 		return (bst_remove_recursive(root, node->right, value));
