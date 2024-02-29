@@ -79,7 +79,12 @@ void binary_tree_levelorder(const binary_tree_t *tree, void (*func)(int));
 void push(binary_tree_t *node, levelorder_queue_t *head,
                 levelorder_queue_t **tail);
 int binary_tree_is_complete(const binary_tree_t *tree);
-
+int binary_tree_is_bst(const binary_tree_t *tree);
+bst_t *bst_insert(bst_t **tree, int value);
+bst_t *array_to_bst(int *array, size_t size);
+bst_t *bst_search(const bst_t *tree, int value);
+bst_t *bst_remove(bst_t *root, int value);
+int binary_tree_is_avl(const binary_tree_t *tree);
 
 
 
