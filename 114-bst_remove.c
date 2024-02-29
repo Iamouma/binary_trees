@@ -56,6 +56,7 @@ bst_t *bst_delete(bst_t *root, bst_t *node)
  * @root: a pointer to the root node of the BST
  * @node: a pointer to the current node in the BST
  * @value: the value to the root node after deletion
+ * Return: a pointer to the root node
  */
 bst_t *bst_remove_recursive(bst_t *root, bst_t *node, int value)
 {
