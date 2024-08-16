@@ -1,49 +1,42 @@
-This project is about Binary trees, a type of data structure.A binary tree is a tree data structure in which each node has at most two children, referred to as the left child and the right child. That is, it is a k-ary tree with k = 2. A recursive definition using set theory is that a binary tree is a tuple (L, S, R), where L and R are binary trees or the empty set and S is a singleton set containing the root.
-
-
 ### Toggle navigation
 Curriculum
 SE Foundations
 Average: 141.92%
-### 0x1B. C - Sorting algorithms & Big O
+### 0x1D. C - Binary trees
 C
+Group project
 Algorithm
 Data structure
- Weight: 2
+ Weight: 5
  Project to be done in teams of 2 people (your team: Ouma Ouma)
- Project over - took place from Jan 17, 2024 6:00 AM to Jan 24, 2024 6:00 AM
+ Project over - took place from Feb 26, 2024 6:00 AM to Mar 1, 2024 6:00 AM
  An auto review will be launched at the deadline
 ### In a nutshell…
 Contribution: 100.0%
-Auto QA review: 30.55/48 mandatory & 59.95/100 optional
-Altogether:  101.81%
-Mandatory: 63.65%
-Optional: 59.95%
+Auto QA review: 157.0/157 mandatory & 179.0/196 optional
+Altogether:  191.33%
+Mandatory: 100.0%
+Optional: 91.33%
 Contribution: 100.0%
-Calculation:  100.0% * (63.65% + (63.65% * 59.95%) )  == 101.81%
-
-
-
-### Background Context
-This project is meant to be done by groups of two students. Each group of two should pair program for at least the mandatory part.
-
+Calculation:  100.0% * (100.0% + (100.0% * 91.33%) )  == 191.33%
 ### Resources
 Read or watch:
 
-Sorting algorithm
-Big O notation
-Sorting algorithms animations
-15 sorting algorithms in 6 minutes (WARNING: The following video can trigger seizure/epilepsy. It is not required for the project, as it is only a funny visualization of different sorting algorithms)
-CS50 Algorithms explanation in detail by David Malan
-All about sorting algorithms
-### Learning Objectives
+Binary tree (note the first line: Not to be confused with B-tree.)
+Data Structure and Algorithms - Tree
+Tree Traversal
+Binary Search Tree
+Data structures: Binary Tree
+Learning Objectives
 At the end of this project, you are expected to be able to explain to anyone, without the help of Google:
 
 ### General
-At least four different sorting algorithms
-What is the Big O notation, and how to evaluate the time complexity of an algorithm
-How to select the best sorting algorithm for a given input
-What is a stable sorting algorithm
+What is a binary tree
+What is the difference between a binary tree and a Binary Search Tree
+What is the possible gain in terms of time complexity compared to linked lists
+What are the depth, the height, the size of a binary tree
+What are the different traversal methods to go through a binary tree
+What is a complete, a full, a perfect, a balanced binary tree
 ### Copyright - Plagiarism
 You are tasked to come up with solutions for the tasks below yourself to meet with the above learning objectives.
 You will not be able to meet the objectives of this or any following project by copying and pasting someone else’s work.
@@ -58,600 +51,608 @@ A README.md file, at the root of the folder of the project, is mandatory
 Your code should use the Betty style. It will be checked using betty-style.pl and betty-doc.pl
 You are not allowed to use global variables
 No more than 5 functions per file
-Unless specified otherwise, you are not allowed to use the standard library. Any use of functions like printf, puts, … is totally forbidden.
+You are allowed to use the standard library
 In the following examples, the main.c files are shown as examples. You can use them to test your functions, but you don’t have to push them to your repo (if you do we won’t take them into account). We will use our own main.c files at compilation. Our main.c files might be different from the one shown in the examples
-The prototypes of all your functions should be included in your header file called sort.h
+The prototypes of all your functions should be included in your header file called binary_trees.h
 Don’t forget to push your header file
 All your header files should be include guarded
-A list/array does not need to be sorted if its size is less than 2.
 GitHub
 There should be one project repository per group. If you clone/fork/whatever a project repository with the same name before the second deadline, you risk a 0% score.
 
 ### More Info
-Data Structure and Functions
-For this project you are given the following print_array, and print_list functions:
-#include <stdlib.h>
-#include <stdio.h>
+Data structures
+Please use the following data structures and types for binary trees. Don’t forget to include them in your header file.
 
+Basic Binary Tree
 /**
- * print_array - Prints an array of integers
- *
- * @array: The array to be printed
- * @size: Number of elements in @array
- */
-void print_array(const int *array, size_t size)
-{
-    size_t i;
-
-    i = 0;
-    while (array && i < size)
-    {
-        if (i > 0)
-            printf(", ");
-        printf("%d", array[i]);
-        ++i;
-    }
-    printf("\n");
-}
-#include <stdio.h>
-#include "sort.h"
-
-/**
- * print_list - Prints a list of integers
- *
- * @list: The list to be printed
- */
-void print_list(const listint_t *list)
-{
-    int i;
-
-    i = 0;
-    while (list)
-    {
-        if (i > 0)
-            printf(", ");
-        printf("%d", list->n);
-        ++i;
-        list = list->next;
-    }
-    printf("\n");
-}
-Our files print_array.c and print_list.c (containing the print_array and print_list functions) will be compiled with your functions during the correction.
-Please declare the prototype of the functions print_array and print_list in your sort.h header file
-Please use the following data structure for doubly linked list:
-/**
- * struct listint_s - Doubly linked list node
+ * struct binary_tree_s - Binary tree node
  *
  * @n: Integer stored in the node
- * @prev: Pointer to the previous element of the list
- * @next: Pointer to the next element of the list
+ * @parent: Pointer to the parent node
+ * @left: Pointer to the left child node
+ * @right: Pointer to the right child node
  */
-typedef struct listint_s
+struct binary_tree_s
 {
-    const int n;
-    struct listint_s *prev;
-    struct listint_s *next;
-} listint_t;
-Please, note this format is used for Quiz and Task questions.
+    int n;
+    struct binary_tree_s *parent;
+    struct binary_tree_s *left;
+    struct binary_tree_s *right;
+};
 
-O(1)
-O(n)
-O(n!)
-n square -> O(n^2)
-log(n) -> O(log(n))
-n * log(n) -> O(nlog(n))
-n + k -> O(n+k)
-…
-Please use the “short” notation (don’t use constants). Example: O(nk) or O(wn) should be written O(n). If an answer is required within a file, all your answers files must have a newline at the end.
+typedef struct binary_tree_s binary_tree_t;
+Binary Search Tree
+typedef struct binary_tree_s bst_t;
+AVL Tree
+typedef struct binary_tree_s avl_t;
+Max Binary Heap
+typedef struct binary_tree_s heap_t;
+Note: For tasks 0 to 23 (included), you have to deal with simple binary trees. They are not BSTs, thus they don’t follow any kind of rule.
 
-### Tests
-Here is a quick tip to help you test your sorting algorithms with big sets of random integers: Random.org
+Print function
+To match the examples in the tasks, you are given this function
 
-### Quiz questions
-Great! You've completed the quiz successfully! Keep going! (Show quiz)
+This function is used only for visualization purposes. You don’t have to push it to your repo. It may not be used during the correction
+
 ### Tasks
-### 0. Bubble sort
+### 0. New node
 mandatory
-Score: 65.0% (Checks completed: 100.0%)
+Score: 100.0% (Checks completed: 100.0%)
+Write a function that creates a binary tree node
 
-
-
-Write a function that sorts an array of integers in ascending order using the Bubble sort algorithm
-
-Prototype: void bubble_sort(int *array, size_t size);
-You’re expected to print the array after each time you swap two elements (See example below)
-Write in the file 0-O, the big O notations of the time complexity of the Bubble sort algorithm, with 1 notation per line:
-
-in the best case
-in the average case
-in the worst case
-alex@/tmp/sort$ cat 0-main.c 
-#include <stdio.h>
+Prototype: binary_tree_t *binary_tree_node(binary_tree_t *parent, int value);
+Where parent is a pointer to the parent node of the node to create
+And value is the value to put in the new node
+When created, a node does not have any child
+Your function must return a pointer to the new node, or NULL on failure
+alex@/tmp/binary_trees$ cat 0-main.c 
 #include <stdlib.h>
-#include "sort.h"
+#include "binary_trees.h"
 
 /**
  * main - Entry point
  *
- * Return: Always 0
+ * Return: Always 0 (Success)
  */
 int main(void)
 {
-    int array[] = {19, 48, 99, 71, 13, 52, 96, 73, 86, 7};
-    size_t n = sizeof(array) / sizeof(array[0]);
+    binary_tree_t *root;
 
-    print_array(array, n);
-    printf("\n");
-    bubble_sort(array, n);
-    printf("\n");
-    print_array(array, n);
+    root = binary_tree_node(NULL, 98);
+
+    root->left = binary_tree_node(root, 12);
+    root->left->left = binary_tree_node(root->left, 6);
+    root->left->right = binary_tree_node(root->left, 16);
+
+    root->right = binary_tree_node(root, 402);
+    root->right->left = binary_tree_node(root->right, 256);
+    root->right->right = binary_tree_node(root->right, 512);
+
+    binary_tree_print(root);
     return (0);
 }
-alex@/tmp/sort$ gcc -Wall -Wextra -Werror -pedantic  -std=gnu89 0-bubble_sort.c 0-main.c print_array.c -o bubble
-alex@/tmp/sort$ ./bubble
-19, 48, 99, 71, 13, 52, 96, 73, 86, 7
-
-19, 48, 71, 99, 13, 52, 96, 73, 86, 7
-19, 48, 71, 13, 99, 52, 96, 73, 86, 7
-19, 48, 71, 13, 52, 99, 96, 73, 86, 7
-19, 48, 71, 13, 52, 96, 99, 73, 86, 7
-19, 48, 71, 13, 52, 96, 73, 99, 86, 7
-19, 48, 71, 13, 52, 96, 73, 86, 99, 7
-19, 48, 71, 13, 52, 96, 73, 86, 7, 99
-19, 48, 13, 71, 52, 96, 73, 86, 7, 99
-19, 48, 13, 52, 71, 96, 73, 86, 7, 99
-19, 48, 13, 52, 71, 73, 96, 86, 7, 99
-19, 48, 13, 52, 71, 73, 86, 96, 7, 99
-19, 48, 13, 52, 71, 73, 86, 7, 96, 99
-19, 13, 48, 52, 71, 73, 86, 7, 96, 99
-19, 13, 48, 52, 71, 73, 7, 86, 96, 99
-13, 19, 48, 52, 71, 73, 7, 86, 96, 99
-13, 19, 48, 52, 71, 7, 73, 86, 96, 99
-13, 19, 48, 52, 7, 71, 73, 86, 96, 99
-13, 19, 48, 7, 52, 71, 73, 86, 96, 99
-13, 19, 7, 48, 52, 71, 73, 86, 96, 99
-13, 7, 19, 48, 52, 71, 73, 86, 96, 99
-7, 13, 19, 48, 52, 71, 73, 86, 96, 99
-
-7, 13, 19, 48, 52, 71, 73, 86, 96, 99
-alex@/tmp/sort$ 
+alex@/tmp/binary_trees$ gcc -Wall -Wextra -Werror -pedantic binary_tree_print.c 0-main.c 0-binary_tree_node.c -o 0-node
+alex@/tmp/binary_trees$ ./0-node
+       .-------(098)-------.
+  .--(012)--.         .--(402)--.
+(006)     (016)     (256)     (512)
+alex@/tmp/binary_trees$
 Repo:
 
-GitHub repository: sorting_algorithms
-File: 0-bubble_sort.c, 0-O
+GitHub repository: binary_trees
+File: 0-binary_tree_node.c
    
-### 1. Insertion sort
+### 1. Insert left
 mandatory
-Score: 65.0% (Checks completed: 100.0%)
+Score: 100.0% (Checks completed: 100.0%)
+Write a function that inserts a node as the left-child of another node
 
-
-
-Write a function that sorts a doubly linked list of integers in ascending order using the Insertion sort algorithm
-
-Prototype: void insertion_sort_list(listint_t **list);
-You are not allowed to modify the integer n of a node. You have to swap the nodes themselves.
-You’re expected to print the list after each time you swap two elements (See example below)
-Write in the file 1-O, the big O notations of the time complexity of the Insertion sort algorithm, with 1 notation per line:
-
-in the best case
-in the average case
-in the worst case
-alex@/tmp/sort$ cat 1-main.c
-#include <stdio.h>
+Prototype: binary_tree_t *binary_tree_insert_left(binary_tree_t *parent, int value);
+Where parent is a pointer to the node to insert the left-child in
+And value is the value to store in the new node
+Your function must return a pointer to the created node, or NULL on failure or if parent is NULL
+If parent already has a left-child, the new node must take its place, and the old left-child must be set as the left-child of the new node.
+alex@/tmp/binary_trees$ cat 1-main.c 
 #include <stdlib.h>
-#include "sort.h"
-
-/**
- * create_listint - Creates a doubly linked list from an array of integers
- *
- * @array: Array to convert to a doubly linked list
- * @size: Size of the array
- *
- * Return: Pointer to the first element of the created list. NULL on failure
- */
-listint_t *create_listint(const int *array, size_t size)
-{
-    listint_t *list;
-    listint_t *node;
-    int *tmp;
-
-    list = NULL;
-    while (size--)
-    {
-        node = malloc(sizeof(*node));
-        if (!node)
-            return (NULL);
-        tmp = (int *)&node->n;
-        *tmp = array[size];
-        node->next = list;
-        node->prev = NULL;
-        list = node;
-        if (list->next)
-            list->next->prev = list;
-    }
-    return (list);
-}
+#include <stdio.h>
+#include "binary_trees.h"
 
 /**
  * main - Entry point
  *
- * Return: Always 0
+ * Return: Always 0 (Success)
  */
 int main(void)
 {
-    listint_t *list;
-    int array[] = {19, 48, 99, 71, 13, 52, 96, 73, 86, 7};
-    size_t n = sizeof(array) / sizeof(array[0]);
+    binary_tree_t *root;
 
-    list = create_listint(array, n);
-    if (!list)
-        return (1);
-    print_list(list);
+    root = binary_tree_node(NULL, 98);
+    root->left = binary_tree_node(root, 12);
+    root->right = binary_tree_node(root, 402);
+    binary_tree_print(root);
     printf("\n");
-    insertion_sort_list(&list);
-    printf("\n");
-    print_list(list);
+    binary_tree_insert_left(root->right, 128);
+    binary_tree_insert_left(root, 54);
+    binary_tree_print(root);
     return (0);
 }
-alex@/tmp/sort$ gcc -Wall -Wextra -Werror -pedantic  -std=gnu89 1-main.c 1-insertion_sort_list.c print_list.c -o insertion
-alex@/tmp/sort$ ./insertion
-19, 48, 99, 71, 13, 52, 96, 73, 86, 7
+alex@/tmp/binary_trees$ gcc -Wall -Wextra -Werror -pedantic binary_tree_print.c 1-main.c 1-binary_tree_insert_left.c 0-binary_tree_node.c -o 1-left
+alex@/tmp/binary_trees$ ./1-left
+  .--(098)--.
+(012)     (402)
 
-19, 48, 71, 99, 13, 52, 96, 73, 86, 7
-19, 48, 71, 13, 99, 52, 96, 73, 86, 7
-19, 48, 13, 71, 99, 52, 96, 73, 86, 7
-19, 13, 48, 71, 99, 52, 96, 73, 86, 7
-13, 19, 48, 71, 99, 52, 96, 73, 86, 7
-13, 19, 48, 71, 52, 99, 96, 73, 86, 7
-13, 19, 48, 52, 71, 99, 96, 73, 86, 7
-13, 19, 48, 52, 71, 96, 99, 73, 86, 7
-13, 19, 48, 52, 71, 96, 73, 99, 86, 7
-13, 19, 48, 52, 71, 73, 96, 99, 86, 7
-13, 19, 48, 52, 71, 73, 96, 86, 99, 7
-13, 19, 48, 52, 71, 73, 86, 96, 99, 7
-13, 19, 48, 52, 71, 73, 86, 96, 7, 99
-13, 19, 48, 52, 71, 73, 86, 7, 96, 99
-13, 19, 48, 52, 71, 73, 7, 86, 96, 99
-13, 19, 48, 52, 71, 7, 73, 86, 96, 99
-13, 19, 48, 52, 7, 71, 73, 86, 96, 99
-13, 19, 48, 7, 52, 71, 73, 86, 96, 99
-13, 19, 7, 48, 52, 71, 73, 86, 96, 99
-13, 7, 19, 48, 52, 71, 73, 86, 96, 99
-7, 13, 19, 48, 52, 71, 73, 86, 96, 99
-
-7, 13, 19, 48, 52, 71, 73, 86, 96, 99
-alex@/tmp/sort$
+       .--(098)-------.
+  .--(054)       .--(402)
+(012)          (128)                                            
+alex@/tmp/binary_trees$
 Repo:
 
-GitHub repository: sorting_algorithms
-File: 1-insertion_sort_list.c, 1-O
+GitHub repository: binary_trees
+File: 1-binary_tree_insert_left.c
    
-### 2. Selection sort
+### 2. Insert right
 mandatory
-Score: 65.0% (Checks completed: 100.0%)
+Score: 100.0% (Checks completed: 100.0%)
+Write a function that inserts a node as the right-child of another node
 
-
-
-Write a function that sorts an array of integers in ascending order using the Selection sort algorithm
-
-Prototype: void selection_sort(int *array, size_t size);
-You’re expected to print the array after each time you swap two elements (See example below)
-Write in the file 2-O, the big O notations of the time complexity of the Selection sort algorithm, with 1 notation per line:
-
-in the best case
-in the average case
-in the worst case
-alex@/tmp/sort$ cat 2-main.c
-#include <stdio.h>
+Prototype: binary_tree_t *binary_tree_insert_right(binary_tree_t *parent, int value);
+Where parent is a pointer to the node to insert the right-child in
+And value is the value to store in the new node
+Your function must return a pointer to the created node, or NULL on failure or if parent is NULL
+If parent already has a right-child, the new node must take its place, and the old right-child must be set as the right-child of the new node.
+alex@/tmp/binary_trees$ cat 2-main.c 
 #include <stdlib.h>
-#include "sort.h"
+#include <stdio.h>
+#include "binary_trees.h"
 
 /**
  * main - Entry point
  *
- * Return: Always 0
+ * Return: Always 0 (Success)
  */
 int main(void)
 {
-    int array[] = {19, 48, 99, 71, 13, 52, 96, 73, 86, 7};
-    size_t n = sizeof(array) / sizeof(array[0]);
+    binary_tree_t *root;
 
-    print_array(array, n);
+    root = binary_tree_node(NULL, 98);
+    root->left = binary_tree_node(root, 12);
+    root->right = binary_tree_node(root, 402);
+    binary_tree_print(root);
     printf("\n");
-    selection_sort(array, n);
-    printf("\n");
-    print_array(array, n);
+    binary_tree_insert_right(root->left, 54);
+    binary_tree_insert_right(root, 128);
+    binary_tree_print(root);
     return (0);
 }
-alex@/tmp/sort$ gcc -Wall -Wextra -Werror -pedantic  -std=gnu89 
-2-main.c 2-selection_sort.c print_array.c -o select
-alex@/tmp/sort$ ./select
-19, 48, 99, 71, 13, 52, 96, 73, 86, 7
+alex@/tmp/binary_trees$ gcc -Wall -Wextra -Werror -pedantic binary_tree_print.c 2-main.c 2-binary_tree_insert_right.c 0-binary_tree_node.c -o 2-right
+alex@/tmp/binary_trees$ ./2-right 
+  .--(098)--.
+(012)     (402)
 
-7, 48, 99, 71, 13, 52, 96, 73, 86, 19
-7, 13, 99, 71, 48, 52, 96, 73, 86, 19
-7, 13, 19, 71, 48, 52, 96, 73, 86, 99
-7, 13, 19, 48, 71, 52, 96, 73, 86, 99
-7, 13, 19, 48, 52, 71, 96, 73, 86, 99
-7, 13, 19, 48, 52, 71, 73, 96, 86, 99
-7, 13, 19, 48, 52, 71, 73, 86, 96, 99
-
-7, 13, 19, 48, 52, 71, 73, 86, 96, 99
-alex@/tmp/sort$
+  .-------(098)--.
+(012)--.       (128)--.
+     (054)          (402)
+alex@/tmp/binary_trees$
 Repo:
 
-GitHub repository: sorting_algorithms
-File: 2-selection_sort.c, 2-O
+GitHub repository: binary_trees
+File: 2-binary_tree_insert_right.c
    
-### 3. Quick sort
+### 3. Delete
 mandatory
-Score: 59.58% (Checks completed: 91.67%)
+Score: 100.0% (Checks completed: 100.0%)
+Write a function that deletes an entire binary tree
 
-
-
-Write a function that sorts an array of integers in ascending order using the Quick sort algorithm
-
-Prototype: void quick_sort(int *array, size_t size);
-You must implement the Lomuto partition scheme.
-The pivot should always be the last element of the partition being sorted.
-You’re expected to print the array after each time you swap two elements (See example below)
-Write in the file 3-O, the big O notations of the time complexity of the Quick sort algorithm, with 1 notation per line:
-
-in the best case
-in the average case
-in the worst case
-alex@/tmp/sort$ cat 3-main.c
-#include <stdio.h>
+Prototype: void binary_tree_delete(binary_tree_t *tree);
+Where tree is a pointer to the root node of the tree to delete
+If tree is NULL, do nothing
+alex@/tmp/binary_trees$ cat 3-main.c 
 #include <stdlib.h>
-#include "sort.h"
+#include <stdio.h>
+#include "binary_trees.h"
 
 /**
  * main - Entry point
  *
- * Return: Always 0
+ * Return: Always 0 (Success)
  */
 int main(void)
 {
-    int array[] = {19, 48, 99, 71, 13, 52, 96, 73, 86, 7};
-    size_t n = sizeof(array) / sizeof(array[0]);
+    binary_tree_t *root;
 
-    print_array(array, n);
-    printf("\n");
-    quick_sort(array, n);
-    printf("\n");
-    print_array(array, n);
+    root = binary_tree_node(NULL, 98);
+    root->left = binary_tree_node(root, 12);
+    root->right = binary_tree_node(root, 402);
+    binary_tree_insert_right(root->left, 54);
+    binary_tree_insert_right(root, 128);
+    binary_tree_print(root);
+    binary_tree_delete(root);
     return (0);
 }
-alex@/tmp/sort$ gcc -Wall -Wextra -Werror -pedantic  -std=gnu89 3-main.c 3-quick_sort.c print_array.c -o quick
-alex@/tmp/sort$ ./quick
-19, 48, 99, 71, 13, 52, 96, 73, 86, 7
-
-7, 48, 99, 71, 13, 52, 96, 73, 86, 19
-7, 13, 99, 71, 48, 52, 96, 73, 86, 19
-7, 13, 19, 71, 48, 52, 96, 73, 86, 99
-7, 13, 19, 71, 48, 52, 73, 96, 86, 99
-7, 13, 19, 71, 48, 52, 73, 86, 96, 99
-7, 13, 19, 48, 71, 52, 73, 86, 96, 99
-7, 13, 19, 48, 52, 71, 73, 86, 96, 99
-
-7, 13, 19, 48, 52, 71, 73, 86, 96, 99
-alex@/tmp/sort$
+alex@/tmp/binary_trees$ gcc -Wall -Wextra -Werror -pedantic binary_tree_print.c 3-main.c 3-binary_tree_delete.c 0-binary_tree_node.c 2-binary_tree_insert_right.c -o 3-del
+alex@/tmp/binary_trees$ valgrind ./3-del
+==13264== Memcheck, a memory error detector
+==13264== Copyright (C) 2002-2013, and GNU GPL'd, by Julian Seward et al.
+==13264== Using Valgrind-3.10.1 and LibVEX; rerun with -h for copyright info
+==13264== Command: ./3-del
+==13264== 
+  .-------(098)--.
+(012)--.       (128)--.
+     (054)          (402)
+==13264== 
+==13264== HEAP SUMMARY:
+==13264==     in use at exit: 0 bytes in 0 blocks
+==13264==   total heap usage: 9 allocs, 9 frees, 949 bytes allocated
+==13264== 
+==13264== All heap blocks were freed -- no leaks are possible
+==13264== 
+==13264== For counts of detected and suppressed errors, rerun with: -v
+==13264== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+alex@/tmp/binary_trees$
 Repo:
 
-GitHub repository: sorting_algorithms
-File: 3-quick_sort.c, 3-O
-    
-### 4. Shell sort - Knuth Sequence
-#advanced
-Score: 65.0% (Checks completed: 100.0%)
-Write a function that sorts an array of integers in ascending order using the Shell sort algorithm, using the Knuth sequence
-
-Prototype: void shell_sort(int *array, size_t size);
-You must use the following sequence of intervals (a.k.a the Knuth sequence):
-n+1 = n * 3 + 1
-1, 4, 13, 40, 121, ...
-You’re expected to print the array each time you decrease the interval (See example below).
-No big O notations of the time complexity of the Shell sort (Knuth sequence) algorithm needed - as the complexity is dependent on the size of array and gap
-
-alex@/tmp/sort$ cat 100-main.c
-#include <stdio.h>
-#include <stdlib.h>
-#include "sort.h"
-
-/**
- * main - Entry point
- *
- * Return: Always 0
- */
-int main(void)
-{
-    int array[] = {19, 48, 99, 71, 13, 52, 96, 73, 86, 7};
-    size_t n = sizeof(array) / sizeof(array[0]);
-
-    print_array(array, n);
-    printf("\n");
-    shell_sort(array, n);
-    printf("\n");
-    print_array(array, n);
-    return (0);
-}
-alex@/tmp/sort$ gcc -Wall -Wextra -Werror -pedantic  -std=gnu89 100-main.c 100-shell_sort.c print_array.c -o shell
-alex@/tmp/sort$ ./shell
-19, 48, 99, 71, 13, 52, 96, 73, 86, 7
-
-13, 7, 96, 71, 19, 48, 99, 73, 86, 52
-7, 13, 19, 48, 52, 71, 73, 86, 96, 99
-
-7, 13, 19, 48, 52, 71, 73, 86, 96, 99
-alex@/tmp/sort$
-Repo:
-
-GitHub repository: sorting_algorithms
-File: 100-shell_sort.c
+GitHub repository: binary_trees
+File: 3-binary_tree_delete.c
    
-### 5. Cocktail shaker sort
-#advanced
-Score: 37.92% (Checks completed: 58.33%)
-Write a function that sorts a doubly linked list of integers in ascending order using the Cocktail shaker sort algorithm
+### 4. Is leaf
+mandatory
+Score: 100.0% (Checks completed: 100.0%)
+Write a function that checks if a node is a leaf
 
-Prototype: void cocktail_sort_list(listint_t **list);
-You are not allowed to modify the integer n of a node. You have to swap the nodes themselves.
-You’re expected to print the list after each time you swap two elements (See example below)
-Write in the file 101-O, the big O notations of the time complexity of the Cocktail shaker sort algorithm, with 1 notation per line:
-
-in the best case
-in the average case
-in the worst case
-alex@/tmp/sort$ cat 101-main.c
-#include <stdio.h>
+Prototype: int binary_tree_is_leaf(const binary_tree_t *node);
+Where node is a pointer to the node to check
+Your function must return 1 if node is a leaf, otherwise 0
+If node is NULL, return 0
+alex@/tmp/binary_trees$ cat 4-main.c 
 #include <stdlib.h>
-#include "sort.h"
-
-/**
- * create_listint - Creates a doubly linked list from an array of integers
- *
- * @array: Array to convert to a doubly linked list
- * @size: Size of the array
- *
- * Return: Pointer to the first element of the created list. NULL on failure
- */
-listint_t *create_listint(const int *array, size_t size)
-{
-    listint_t *list;
-    listint_t *node;
-    int *tmp;
-
-    list = NULL;
-    while (size--)
-    {
-        node = malloc(sizeof(*node));
-        if (!node)
-            return (NULL);
-        tmp = (int *)&node->n;
-        *tmp = array[size];
-        node->next = list;
-        node->prev = NULL;
-        list = node;
-        if (list->next)
-            list->next->prev = list;
-    }
-    return (list);
-}
+#include <stdio.h>
+#include "binary_trees.h"
 
 /**
  * main - Entry point
  *
- * Return: Always 0
+ * Return: Always 0 (Success)
  */
 int main(void)
 {
-    listint_t *list;
-    int array[] = {19, 48, 99, 71, 13, 52, 96, 73, 86, 7};
-    size_t n = sizeof(array) / sizeof(array[0]);
+    binary_tree_t *root;
+    int ret;
 
-    list = create_listint(array, n);
-    if (!list)
-        return (1);
-    print_list(list);
-    printf("\n");
-    cocktail_sort_list(&list);
-    printf("\n");
-    print_list(list);
+    root = binary_tree_node(NULL, 98);
+    root->left = binary_tree_node(root, 12);
+    root->right = binary_tree_node(root, 402);
+    binary_tree_insert_right(root->left, 54);
+    binary_tree_insert_right(root, 128);
+    binary_tree_print(root);
+
+    ret = binary_tree_is_leaf(root);
+    printf("Is %d a leaf: %d\n", root->n, ret);
+    ret = binary_tree_is_leaf(root->right);
+    printf("Is %d a leaf: %d\n", root->right->n, ret);
+    ret = binary_tree_is_leaf(root->right->right);
+    printf("Is %d a leaf: %d\n", root->right->right->n, ret);
     return (0);
 }
-alex@/tmp/sort$ gcc -Wall -Wextra -Werror -pedantic  -std=gnu89 101-main.c 101-cocktail_sort_list.c print_list.c -o cocktail
-alex@/tmp/sort$ ./cocktail
-19, 48, 99, 71, 13, 52, 96, 73, 86, 7
-
-19, 48, 71, 99, 13, 52, 96, 73, 86, 7
-19, 48, 71, 13, 99, 52, 96, 73, 86, 7
-19, 48, 71, 13, 52, 99, 96, 73, 86, 7
-19, 48, 71, 13, 52, 96, 99, 73, 86, 7
-19, 48, 71, 13, 52, 96, 73, 99, 86, 7
-19, 48, 71, 13, 52, 96, 73, 86, 99, 7
-19, 48, 71, 13, 52, 96, 73, 86, 7, 99
-19, 48, 71, 13, 52, 96, 73, 7, 86, 99
-19, 48, 71, 13, 52, 96, 7, 73, 86, 99
-19, 48, 71, 13, 52, 7, 96, 73, 86, 99
-19, 48, 71, 13, 7, 52, 96, 73, 86, 99
-19, 48, 71, 7, 13, 52, 96, 73, 86, 99
-19, 48, 7, 71, 13, 52, 96, 73, 86, 99
-19, 7, 48, 71, 13, 52, 96, 73, 86, 99
-7, 19, 48, 71, 13, 52, 96, 73, 86, 99
-7, 19, 48, 13, 71, 52, 96, 73, 86, 99
-7, 19, 48, 13, 52, 71, 96, 73, 86, 99
-7, 19, 48, 13, 52, 71, 73, 96, 86, 99
-7, 19, 48, 13, 52, 71, 73, 86, 96, 99
-7, 19, 13, 48, 52, 71, 73, 86, 96, 99
-7, 13, 19, 48, 52, 71, 73, 86, 96, 99
-
-7, 13, 19, 48, 52, 71, 73, 86, 96, 99
-alex@/tmp/sort$
+alex@/tmp/binary_trees$ gcc -Wall -Wextra -Werror -pedantic binary_tree_print.c 4-binary_tree_is_leaf.c 4-main.c 0-binary_tree_node.c 2-binary_tree_insert_right.c -o 4-leaf
+alex@/tmp/binary_trees$ ./4-leaf 
+  .-------(098)--.
+(012)--.       (128)--.
+     (054)          (402)
+Is 98 a leaf: 0
+Is 128 a leaf: 0
+Is 402 a leaf: 1
+alex@/tmp/binary_trees$
 Repo:
 
-GitHub repository: sorting_algorithms
-File: 101-cocktail_sort_list.c, 101-O
-    
-### 6. Counting sort
-#advanced
-Score: 65.0% (Checks completed: 100.0%)
-Write a function that sorts an array of integers in ascending order using the Counting sort algorithm
-
-Prototype: void counting_sort(int *array, size_t size);
-You can assume that array will contain only numbers >= 0
-You are allowed to use malloc and free for this task
-You’re expected to print your counting array once it is set up (See example below)
-This array is of size k + 1 where k is the largest number in array
-Write in the file 102-O, the big O notations of the time complexity of the Counting sort algorithm, with 1 notation per line:
-
-in the best case
-in the average case
-in the worst case
-alex@/tmp/sort$ cat 102-main.c
-#include <stdio.h>
-#include <stdlib.h>
-#include "sort.h"
-
-/**
- * main - Entry point
- *
- * Return: Always 0
- */
-int main(void)
-{
-    int array[] = {19, 48, 99, 71, 13, 52, 96, 73, 86, 7};
-    size_t n = sizeof(array) / sizeof(array[0]);
-
-    print_array(array, n);
-    printf("\n");
-    counting_sort(array, n);
-    printf("\n");
-    print_array(array, n);
-    return (0);
-}
-alex@/tmp/sort$ gcc -Wall -Wextra -Werror -pedantic  -std=gnu89 102-main.c 102-counting_sort.c print_array.c -o counting
-alex@/tmp/sort$ ./counting
-19, 48, 99, 71, 13, 52, 96, 73, 86, 7
-
-0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 6, 6, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 9, 9, 9, 10
-
-7, 13, 19, 48, 52, 71, 73, 86, 96, 99
-alex@/tmp/sort$
-Repo:
-
-GitHub repository: sorting_algorithms
-File: 102-counting_sort.c, 102-O
+GitHub repository: binary_trees
+File: 4-binary_tree_is_leaf.c
    
-### 7. Merge sort
-#advanced
-Score: 65.0% (Checks completed: 100.0%)
-Write a function that sorts an array of integers in ascending order using the Merge sort algorithm
+### 5. Is root
+mandatory
+Score: 100.0% (Checks completed: 100.0%)
+Write a function that checks if a given node is a root
 
-Prototype: void merge_sort(int *array, size_t size);
-You must implement the top-down merge sort algorithm
-When you divide an array into two sub-arrays, the size of the left array should always be <= the size of the right array. i.e. {1, 2, 3, 4, 5} -> {1, 2}, {3, 4, 5}
-Sort the left array before the right array
-You are allowed to use printf
-You are allowed to use malloc and free only once (only one call)
-Output: see example
-Write in the file 103-O, the big O notations of the time complexity of t
+Prototype: int binary_tree_is_root(const binary_tree_t *node);
+Where node is a pointer to the node to check
+Your function must return 1 if node is a root, otherwise 0
+If node is NULL, return 0
+alex@/tmp/binary_trees$ cat 5-main.c 
+#include <stdlib.h>
+#include <stdio.h>
+#include "binary_trees.h"
+
+/**
+ * main - Entry point
+ *
+ * Return: Always 0 (Success)
+ */
+int main(void)
+{
+    binary_tree_t *root;
+    int ret;
+
+    root = binary_tree_node(NULL, 98);
+    root->left = binary_tree_node(root, 12);
+    root->right = binary_tree_node(root, 402);
+    binary_tree_insert_right(root->left, 54);
+    binary_tree_insert_right(root, 128);
+    binary_tree_print(root);
+
+    ret = binary_tree_is_root(root);
+    printf("Is %d a root: %d\n", root->n, ret);
+    ret = binary_tree_is_root(root->right);
+    printf("Is %d a root: %d\n", root->right->n, ret);
+    ret = binary_tree_is_root(root->right->right);
+    printf("Is %d a root: %d\n", root->right->right->n, ret);
+    return (0);
+}
+alex@/tmp/binary_trees$ gcc -Wall -Wextra -Werror -pedantic binary_tree_print.c 5-binary_tree_is_root.c 5-main.c 0-binary_tree_node.c 2-binary_tree_insert_right.c -o 5-root
+alex@/tmp/binary_trees$ ./5-root 
+  .-------(098)--.
+(012)--.       (128)--.
+     (054)          (402)
+Is 98 a root: 1
+Is 128 a root: 0
+Is 402 a root: 0
+alex@/tmp/binary_trees$
+Repo:
+
+GitHub repository: binary_trees
+File: 5-binary_tree_is_root.c
+   
+### 6. Pre-order traversal
+mandatory
+Score: 100.0% (Checks completed: 100.0%)
+Write a function that goes through a binary tree using pre-order traversal
+
+Prototype: void binary_tree_preorder(const binary_tree_t *tree, void (*func)(int));
+Where tree is a pointer to the root node of the tree to traverse
+And func is a pointer to a function to call for each node. The value in the node must be passed as a parameter to this function.
+If tree or func is NULL, do nothing
+alex@/tmp/binary_trees$ cat 6-main.c
+#include <stdlib.h>
+#include <stdio.h>
+#include "binary_trees.h"
+
+/**
+ * print_num - Prints a number
+ *
+ * @n: Number to be printed
+ */
+void print_num(int n)
+{
+    printf("%d\n", n);
+}
+
+/**
+ * main - Entry point
+ *
+ * Return: Always 0 (Success)
+ */
+int main(void)
+{
+    binary_tree_t *root;
+
+    root = binary_tree_node(NULL, 98);
+    root->left = binary_tree_node(root, 12);
+    root->right = binary_tree_node(root, 402);
+    root->left->left = binary_tree_node(root->left, 6);
+    root->left->right = binary_tree_node(root->left, 56);
+    root->right->left = binary_tree_node(root->right, 256);
+    root->right->right = binary_tree_node(root->right, 512);
+
+    binary_tree_print(root);
+    binary_tree_preorder(root, &print_num);
+    return (0);
+}
+alex@/tmp/binary_trees$ gcc -Wall -Wextra -Werror -pedantic binary_tree_print.c 6-main.c 6-binary_tree_preorder.c 0-binary_tree_node.c -o 6-pre
+alex@/tmp/binary_trees$ ./6-pre
+       .-------(098)-------.
+  .--(012)--.         .--(402)--.
+(006)     (056)     (256)     (512)
+98
+12
+6
+56
+402
+256
+512
+alex@/tmp/binary_trees$
+Repo:
+
+GitHub repository: binary_trees
+File: 6-binary_tree_preorder.c
+   
+### 7. In-order traversal
+mandatory
+Score: 100.0% (Checks completed: 100.0%)
+Write a function that goes through a binary tree using in-order traversal
+
+Prototype: void binary_tree_inorder(const binary_tree_t *tree, void (*func)(int));
+Where tree is a pointer to the root node of the tree to traverse
+And func is a pointer to a function to call for each node. The value in the node must be passed as a parameter to this function.
+If tree or func is NULL, do nothing
+alex@/tmp/binary_trees$ cat 7-main.c
+#include <stdlib.h>
+#include <stdio.h>
+#include "binary_trees.h"
+
+/**
+ * print_num - Prints a number
+ *
+ * @n: Number to be printed
+ */
+void print_num(int n)
+{
+    printf("%d\n", n);
+}
+
+/**
+ * main - Entry point
+ *
+ * Return: Always 0 (Success)
+ */
+int main(void)
+{
+    binary_tree_t *root;
+
+    root = binary_tree_node(NULL, 98);
+    root->left = binary_tree_node(root, 12);
+    root->right = binary_tree_node(root, 402);
+    root->left->left = binary_tree_node(root->left, 6);
+    root->left->right = binary_tree_node(root->left, 56);
+    root->right->left = binary_tree_node(root->right, 256);
+    root->right->right = binary_tree_node(root->right, 512);
+
+    binary_tree_print(root);
+    binary_tree_inorder(root, &print_num);
+    return (0);
+}
+alex@/tmp/binary_trees$ gcc -Wall -Wextra -Werror -pedantic binary_tree_print.c 7-main.c 7-binary_tree_inorder.c 0-binary_tree_node.c -o 7-in
+alex@/tmp/binary_trees$ ./7-in
+       .-------(098)-------.
+  .--(012)--.         .--(402)--.
+(006)     (056)     (256)     (512)
+6
+12
+56
+98
+256
+402
+512
+alex@/tmp/binary_trees$
+Repo:
+
+GitHub repository: binary_trees
+File: 7-binary_tree_inorder.c
+   
+### 8. Post-order traversal
+mandatory
+Score: 100.0% (Checks completed: 100.0%)
+Write a function that goes through a binary tree using post-order traversal
+
+Prototype: void binary_tree_postorder(const binary_tree_t *tree, void (*func)(int));
+Where tree is a pointer to the root node of the tree to traverse
+And func is a pointer to a function to call for each node. The value in the node must be passed as a parameter to this function.
+If tree or func is NULL, do nothing
+alex@/tmp/binary_trees$ cat 8-main.c
+#include <stdlib.h>
+#include <stdio.h>
+#include "binary_trees.h"
+
+/**
+ * print_num - Prints a number
+ *
+ * @n: Number to be printed
+ */
+void print_num(int n)
+{
+    printf("%d\n", n);
+}
+
+/**
+ * main - Entry point
+ *
+ * Return: Always 0 (Success)
+ */
+int main(void)
+{
+    binary_tree_t *root;
+
+    root = binary_tree_node(NULL, 98);
+    root->left = binary_tree_node(root, 12);
+    root->right = binary_tree_node(root, 402);
+    root->left->left = binary_tree_node(root->left, 6);
+    root->left->right = binary_tree_node(root->left, 56);
+    root->right->left = binary_tree_node(root->right, 256);
+    root->right->right = binary_tree_node(root->right, 512);
+
+    binary_tree_print(root);
+    binary_tree_postorder(root, &print_num);
+    return (0);
+}
+alex@/tmp/binary_trees$ gcc -Wall -Wextra -Werror -pedantic binary_tree_print.c 8-main.c 8-binary_tree_postorder.c 0-binary_tree_node.c -o 8-post
+alex@/tmp/binary_trees$ ./8-post
+       .-------(098)-------.
+  .--(012)--.         .--(402)--.
+(006)     (056)     (256)     (512)
+6
+56
+12
+256
+512
+402
+98
+alex@/tmp/binary_trees$
+Repo:
+
+GitHub repository: binary_trees
+File: 8-binary_tree_postorder.c
+   
+### 9. Height
+mandatory
+Score: 100.0% (Checks completed: 100.0%)
+Write a function that measures the height of a binary tree
+
+Prototype: size_t binary_tree_height(const binary_tree_t *tree);
+Where tree is a pointer to the root node of the tree to measure the height.
+If tree is NULL, your function must return 0
+alex@/tmp/binary_trees$ cat 9-main.c 
+#include <stdlib.h>
+#include <stdio.h>
+#include "binary_trees.h"
+
+/**
+ * main - Entry point
+ *
+ * Return: Always 0 (Success)
+ */
+int main(void)
+{
+    binary_tree_t *root;
+    size_t height;
+
+    root = binary_tree_node(NULL, 98);
+    root->left = binary_tree_node(root, 12);
+    root->right = binary_tree_node(root, 402);
+    binary_tree_insert_right(root->left, 54);
+    binary_tree_insert_right(root, 128);
+    binary_tree_print(root);
+
+    height = binary_tree_height(root);
+    printf("Height from %d: %lu\n", root->n, height);
+    height = binary_tree_height(root->right);
+    printf("Height from %d: %lu\n", root->right->n, height);
+    height = binary_tree_height(root->left->right);
+    printf("Height from %d: %lu\n", root->left->right->n, height);
+    return (0);
+}
+alex@/tmp/binary_trees$ gcc -Wall -Wextra -Werror -pedantic binary_tree_print.c 9-binary_tree_height.c 9-main.c 0-binary_tree_node.c 2-binary_tree_insert_right.c -o 9-height
+alex@/tmp/binary_trees$ ./9-height 
+  .-------(098)--.
+(012)--.       (128)--.
+     (054)          (402)
+Height from 98: 2
+Height from 128: 1
+Height from 54: 0
+alex@/tmp/binary_trees$
+Repo:
+
+GitHub repository: binary_trees
+File: 9-binary_tree_height.c
+   
+### 10. Depth
+mandatory
+Score: 100.0% (Checks completed: 100.0%)
+Write a function that measures the depth of a node in a binary tree
+
+Prototype: size_t binary_tree_depth(const binary_tree_t *tree);
+Where tree is a pointer to the node to measure the depth
+If tree is NULL, your function must return 0
+alex@/tmp/binary_trees$ cat 10-main.c 
+#include <stdlib.h>
+#include <stdio.h>
+#include "binary_trees.h"
+
+/**
+ * main - 
